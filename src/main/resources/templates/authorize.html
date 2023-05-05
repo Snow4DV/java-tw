@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Авторизация</title>
+  <link th:href="@{/styles/main.css}" rel="stylesheet" />
+  <script type="text/javascript" th:src="@{/js/main.js}"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+<script type="text/javascript" th:if="${loginError}">
+  openAlertDialog("Ошибка", "Во время авторизации произошла ошибка - неверный логин или пароль. Попробуйте еще раз.");
+</script>
+<header th:replace="/includes/header :: header"> </header>
+
+
+
+<div class="login-frame">
+  <form  th:action="@{/login}" method="post" class="login-form">
+    <h2>Авторизация</h2>
+    <label for="username">Имя пользователя</label>
+    <input type="text" id="username" name="username" class="form-input" required>
+
+    <label for="password">Пароль</label>
+    <input type="password" id="password" name="password" class="form-input" required>
+
+    <input type="submit" value="Войти" class="form-submit">
+  </form>
+</div>
+</body>
+</html>
+

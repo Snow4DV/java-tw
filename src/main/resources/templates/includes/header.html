@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<header>
+    <img height="100px" th:src="@{/images/logo.svg}">
+    <nav>
+        <a right href="#">О компании</a>
+        <a right href="#">Контакты</a>
+        <a right href="/">Главная страница</a>
+        <a left href="/account" sec:authorize="isAuthenticated()">Личный кабинет</a>
+        <a left href="/logout" sec:authorize="isAuthenticated()">Выйти</a>
+        <a left href="/login" sec:authorize="!isAuthenticated()">Войти</a>
+        <a left href="/register" sec:authorize="!isAuthenticated()">Зарегистрироваться</a>
+    </nav>
+</header>
+</html>

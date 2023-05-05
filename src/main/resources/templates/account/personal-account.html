@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create account</title>
+  <link th:href="@{/styles/main.css}" rel="stylesheet" />
+  <script type="text/javascript" th:src="@{/js/main.js}"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header th:replace="/includes/header :: header"> </header>
+
+<div class="personal-account">
+  <div class="actions">
+    <ul>
+      <li><a th:href="@{/logout}">Выйти</a></li>
+      <li><a th:href="@{/account/delete}">Удалить пользователя</a></li>
+      <li><a href="@{/become-driver}" highlighted>Стать водителем</a></li>
+    </ul>
+  </div>
+  <div class="account-info">
+    <h2>Информация об аккаунте</h2>
+    <div class="info-row">
+      <span class="info-label">Имя пользователя:</span>
+      <span class="info-value" th:text="${user.getUsername()}"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">ID:</span>
+      <span class="info-value" th:text="${user.getId()}"></span>
+    </div>
+    <div class="info-row">
+      <span class="info-label">Статус:</span>
+      <span class="info-value" th:text="${user.getRoleString()}"></span>
+    </div>
+  </div>
+</div>
+
+
+</body>
+
+</html>
