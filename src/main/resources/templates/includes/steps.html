@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<div class="steps-container">
+    <div class="step">
+        <h2>Шаг 1 - Зарегистрируйтесь</h2>
+        <p>Пройдите регистрацию на сервисе, заполнив всю нужную информацию. Сделать это можно по <a th:href="@{/register}">этой ссылке</a>.</p>
+        <img height="240px" th:src="@{images/form-img.svg}">
+    </div>
+    <div class="arrow">
+        <img height="50px" th:src="@{images/arrow.svg}">
+    </div>
+    <div class="step" th:if="${!isDriver}">
+        <h2>Шаг 2 - Разместите заказ</h2>
+        <p>Создайте новый заказ, указав свою цену в рыночном диапазоне и желаемый класс автомобиля.</p>
+        <img height="240px" th:src="@{images/map-pin.svg}">
+    </div>
+    <div class="step" th:if="${isDriver}">
+        <h2>Шаг 2 - Найдите заказ</h2>
+        <p>Найдите удобный заказ в списке заказов.</p>
+        <img height="240px" th:src="@{images/locations.svg}">
+    </div>
+    <div class="arrow">
+        <img height="50px" th:src="@{images/arrow.svg}">
+    </div>
+    <div class="step" th:if="${!isDriver}">
+        <h2>Шаг 3 - Вы великолепны!</h2>
+        <p>Дождитесь водителя, который выберет ваш заказ, мы обещаем, что это произойдет очень быстро!</p>
+        <img height="240px" th:src="@{images/fast-car.svg}">
+    </div>
+    <div class="step" th:if="${isDriver}">
+        <h2>Шаг 3 - Вы великолепны!</h2>
+        <p>Поздравляем с вашим первым клиентом! Надеемся, вы с нами надолго :)</p>
+        <img height="240px" th:src="@{images/fast-car.svg}">
+    </div>
+    <div class="br"></div>
+    <div class="center-div">
+        <button class="form-submit steps-button" th:if="${!isDriver}" th:onclick="window.location.href='/?driver'">А если я - водитель?</button>
+        <button class="form-submit steps-button" th:if="${isDriver}" th:onclick="window.location.href='/?passenger'">А если я - пассажир?</button>
+    </div>
+</div>
+</html>

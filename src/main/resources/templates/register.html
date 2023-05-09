@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Create account</title>
+  <title>Регистрация</title>
   <link th:href="@{/styles/main.css}" rel="stylesheet" />
   <script type="text/javascript" th:src="@{/js/main.js}"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +20,8 @@
     <h2>Регистрация</h2>
     <label for="username">Имя пользователя</label>
     <input type="text" id="username" name="username" class="form-input" required th:field="*{username}">
+    <label for="phoneNumber">Номер телефона</label>
+    <input type="text" id="phoneNumber" name="phoneNumber" class="form-input" required th:field="*{phoneNumber}">
 
     <label for="password">Пароль</label>
     <input type="password" id="password" name="password" class="form-input" required th:field="*{password}">

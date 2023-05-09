@@ -2,13 +2,14 @@ package ru.snowadv.javatw.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Transient;
+
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,12 +26,17 @@ public class User implements UserDetails {
     private String password;
     @Transient
     private String passwordConfirm;
+
+    public String phoneNumber;
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
     @OneToOne(optional = true, cascade = CascadeType.ALL)
     @Nullable
     @JoinColumn(name = "driver_description_id", referencedColumnName = "id")
     private DriverDescription driverDescription;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Order> orders;
 
     public User() {
     }
@@ -66,21 +72,23 @@ public class User implements UserDetails {
         return password;
     }
 
+    public boolean isDriver() {
+        return roles.stream().anyMatch(role -> role.getName().equals("ROLE_DRIVER"));
+    }
     public String getRoleString() {
-        Role role = roles.stream().findFirst().orElse(null);
-
-        if(role == null) {
-            return "Не установлена";
+        if(roles.stream().anyMatch(role -> role.getName().equals("ROLE_ADMIN"))) {
+            return "Администратор";
+        } else if(roles.stream().anyMatch(role -> role.getName().equals("ROLE_DRIVER"))) {
+            return "Водитель";
+        } else if(roles.stream().anyMatch(role -> role.getName().equals("ROLE_USER"))) {
+            return "Пассажир";
+        } else {
+            return "Неизвестный";
         }
+    }
 
-        switch(role.getName()) {
-            case "ROLE_USER":
-                return "Пассажир";
-            case "ROLE_DRIVER":
-                return "Водитель";
-            default:
-                return "Другая роль";
-        }
+    public void  addOrder(Order order) {
+        orders.add(order);
     }
 
 }

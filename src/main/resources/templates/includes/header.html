@@ -4,9 +4,8 @@
 <header>
     <img height="100px" th:src="@{/images/logo.svg}">
     <nav>
-        <a right href="#">О компании</a>
-        <a right href="#">Контакты</a>
         <a right href="/">Главная страница</a>
+        <a left href="/order/archive" sec:authorize="isAuthenticated()">Архив заказов</a>
         <a left href="/account" sec:authorize="isAuthenticated()">Личный кабинет</a>
         <a left href="/logout" sec:authorize="isAuthenticated()">Выйти</a>
         <a left href="/login" sec:authorize="!isAuthenticated()">Войти</a>

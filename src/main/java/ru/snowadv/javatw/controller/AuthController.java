@@ -40,7 +40,6 @@ public class AuthController {
 
         return "redirect:/login";
     }
-//RequestParam("status") Optional<Integer> status
     @GetMapping("/login")
     public String login(ServletRequest request, Model model) {
         model.addAttribute("loginError", request.getParameterMap().containsKey("error"));

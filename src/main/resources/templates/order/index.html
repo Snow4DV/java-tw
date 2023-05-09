@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Главная страница</title>
+  <link th:href="@{/styles/main.css}" rel="stylesheet" />
+  <script type="text/javascript" th:src="@{/js/main.js}"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+<header th:replace="/includes/header :: header"> </header>
+
+<h1 th:if="${!isDriver}">Ваши заказы:</h1>
+<h1 th:if="${isDriver}">Доступные заказы:</h1>
+
+<div class="center-div" th:if="${orders == null || orders.size() == 0}"><h2>Нет заказов</h2></div>
+
+
+
+<div class="orders-container">
+  <div th:each="order : ${orders}" class="cont-order">
+    <h2 th:utext="${'Заказ от ' + order.getUser().getUsername()}"></h2>
+    <p th:utext="${'<b>Адрес</b>: ' + order.getAddress()}"></p>
+    <p th:utext="${'<b>Точка назначения</b>: ' + order.getDestination()}"></p>
+    <p th:utext="${'<b>Предлагаемая цена</b>: ' + order.getPrice()}"></p>
+    <p th:utext="${'<b>Назначенный таксист</b>: ' + order.getAssignedDriverUsername()}"></p>
+    <p th:utext="${'<b>Предложений</b>: ' + order.getOffers().size()}"></p>
+    <div class="center-div"><button class="green-button stretch" th:if="${isDriver}">Проложить маршрут</button></div>
+    <div class="center-div"><button class="green-button stretch" th:if="${isDriver}" th:onclick="'openOfferPriceDialog(' + ${order.getId()} + ',' + ${order.getPrice()} + ')'" th:href="@{/order/{id}/take(id=${order.getId()})}">Предложить цену</button></div>
+    <div class="center-div"><button class="green-button stretch" th:if="${!isDriver}" th:onclick="'window.location.href=\'' + @{/order/{id}/info(id=${order.getId()})}  + '\''" th:href="@{/order/{id}/take(id=${order.getId()})}">Подробнее</button></div>
+  </div>
+</div>
+
+<div class="center-div" sec:authorize="!hasRole('DRIVER')"><button th:href="@{/order/add}" th:onclick="window.location.href='/order/add'" class="green-button">Добавить заказ</button> </div>
+
+
+
+
+</body>
+</html>
+

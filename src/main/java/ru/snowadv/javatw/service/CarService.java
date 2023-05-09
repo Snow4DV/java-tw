@@ -16,6 +16,14 @@ public class CarService {
         return carRepository.findAll();
     }
 
+    public List<Car> allCarsSorted() {
+        return carRepository.findAllByOrderByManufacturerAsc();
+    }
+
+    public Car getCarById(Long id) {
+        return carRepository.getReferenceById(id);
+    }
+
 
     public void addCar(Car car) {
         carRepository.save(car);

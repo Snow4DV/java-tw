@@ -256,3 +256,52 @@ p > a:active {
     color: #444;
 }
 
+.orders-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: space-between;
+    margin: 50px;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.cont-order {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: max-content;
+}
+.green-button {
+    border-radius: 5px;
+    display: block;
+    width: max-content;
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.green-button:hover {
+    background-color: #3e8e41;
+}
+
+
+
+.stretch {
+    width: 100%;
+}
+
+
+.buttons-flex {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+

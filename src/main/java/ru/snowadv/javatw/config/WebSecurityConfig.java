@@ -31,8 +31,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //Доступ только для пользователей с ролью Администратор
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/account").hasRole("USER")
-                .antMatchers("/account/add-driver-info").hasRole("DRIVER")
                 .antMatchers("/account/become-driver").access("isFullyAuthenticated() and !hasRole('DRIVER')")
+                .antMatchers("/account/get-driver-role").access("isFullyAuthenticated() and !hasRole('DRIVER')")
+                .antMatchers("/order/add").access("isFullyAuthenticated() and !hasRole('DRIVER')")
                 //Доступ разрешен всем пользователей
                 .antMatchers("/", "/resources/**").permitAll()
                 .antMatchers("/js/**", "/styles/**", "/images/**").permitAll()

@@ -14,6 +14,7 @@ import ru.snowadv.javatw.entity.User;
 import ru.snowadv.javatw.repository.RoleRepository;
 import ru.snowadv.javatw.repository.UserRepository;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
@@ -55,6 +56,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
+
+    public User save(User user) {
+        return userRepository.save(user);
+    }
     public boolean saveUser(User user, String role) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
 
@@ -91,4 +96,5 @@ public class UserService implements UserDetailsService {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     }
+
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Добавить заказ</title>
+  <link th:href="@{/styles/main.css}" rel="stylesheet" />
+  <script type="text/javascript" th:src="@{/js/main.js}"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<header th:replace="/includes/header :: header"> </header>
+<body>
+
+
+
+<div class="login-frame">
+  <form  th:action="@{/order/add}" method="post" class="login-form" th:object="${newOrder}">
+    <h2>Создать заказ</h2>
+    <label for="addressFrom">Адрес подачи</label>
+    <input type="text" id="addressFrom" class="form-input" required th:field="*{address}">
+    <label for="addressDestination">Адрес точки назначения</label>
+    <input type="text" id="addressDestination" class="form-input" required th:field="*{destination}">
+    <label for="price">Предлагаемая цена</label>
+    <input type="text" id="price" class="form-input" required th:field="*{price}">
+    <input type="submit" value="Создать" class="form-submit">
+  </form>
+</div>
+
+</body>
+</html>
+

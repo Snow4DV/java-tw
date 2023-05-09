@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.snowadv.javatw.service.UserService;
 
 import javax.servlet.ServletRequest;
+import java.security.Principal;
 
 @Controller
 @RequestMapping
@@ -18,7 +19,10 @@ public class ContentController {
     private final UserService userService;
 
     @GetMapping(value={"", "/", "/index", "/index.html", "/index.htm"})
-    public String showMainPage(ServletRequest request, Model model) {
+    public String showMainPage(Principal principal, ServletRequest request, Model model) {
+        if(principal != null) {
+            return "redirect:/order";
+        }
         model.addAttribute("isDriver", request.getParameterMap().containsKey("driver"));
         return "index";
     }

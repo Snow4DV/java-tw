@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Информация о заказе</title>
+  <link th:href="@{/styles/main.css}" rel="stylesheet" />
+  <script type="text/javascript" th:src="@{/js/main.js}"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+<header th:replace="/includes/header :: header"> </header>
+
+
+
+<div class="center-div" style="margin-top: 50px">
+<div class="cont-order">
+  <h2 th:utext="${'Заказ от ' + order.getUser().getUsername()}"></h2>
+  <p th:utext="${'<b>Адрес</b>: ' + order.getAddress()}"></p>
+  <p th:utext="${'<b>Точка назначения</b>: ' + order.getDestination()}"></p>
+  <p th:utext="${'<b>Предлагаемая цена</b>: ' + order.getPrice()}"></p>
+  <p th:utext="${'<b>Назначенный таксист</b>: ' + order.getAssignedDriverUsername()}"></p>
+  <p th:utext="${'<b>Номер телефона клиента</b>: ' + order.getUser().getPhoneNumber()}"></p>
+  <p th:if="${order.getAssignedDriver() != null}" th:utext="${'<b>Номер телефона таксиста</b>: ' + order.getAssignedDriver().getUser().getPhoneNumber()}"></p>
+  <p th:if="${order.getAssignedDriver() == null}" th:utext="${'<b>Предложений</b>: ' + offers.size()}"></p>
+  <p th:if="${order.getAssignedDriver() == null}"><b>Выберите кандидата:</b></p>
+  <ul th:if="${order.getAssignedDriver() == null}">
+    <div th:each="offer : ${offers}">
+      <li><a th:href="@{/order/{id}/choose?offerId={offerId}(id=${order.getId()},offerId=${offer.getId()})}" th:utext="'Водитель ' + ${offer.getDriver().getUser().getUsername()} + ', цена: ' + ${offer.getPrice()} + ' р. , рейтинг: ' + ${offer.getDriver().getStringRating()}"></a></li>
+    </div>
+  </ul>
+  <div class="center-div"><button class="green-button stretch" th:if="${isDriver}" th:onclick="'window.location.href=\'' + @{/order/{id}/finish(id=${order.getId()})}  + '\''" >Завершить заказ</button></div>
+</div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
+
