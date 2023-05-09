@@ -39,5 +39,7 @@ public class DriverDescription {
         return String.format("%.2f", getRating());
     }
 
-
+    public User getUser() {
+        return user;
+    }
 }

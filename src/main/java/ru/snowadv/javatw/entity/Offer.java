@@ -28,4 +28,6 @@ public class Offer {
         this.driver = driver;
         this.price = price;
     }
+
+
 }

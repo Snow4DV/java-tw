@@ -26,10 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                //Доступ только для не зарегистрированных пользователей
                 .antMatchers("/register").not().fullyAuthenticated()
-                //Доступ только для пользователей с ролью Администратор
-                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/account").hasRole("USER")
                 .antMatchers("/account/become-driver").access("isFullyAuthenticated() and !hasRole('DRIVER')")
                 .antMatchers("/account/get-driver-role").access("isFullyAuthenticated() and !hasRole('DRIVER')")
