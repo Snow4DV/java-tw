@@ -12,9 +12,6 @@ public class CarService {
     @Autowired
     CarRepository carRepository;
 
-    public List<Car> allCars() {
-        return carRepository.findAll();
-    }
 
     public List<Car> allCarsSorted() {
         return carRepository.findAllByOrderByManufacturerAsc();
@@ -25,7 +22,4 @@ public class CarService {
     }
 
 
-    public void addCar(Car car) {
-        carRepository.save(car);
-    }
 }

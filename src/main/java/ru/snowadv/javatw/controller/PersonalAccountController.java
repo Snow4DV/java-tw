@@ -73,7 +73,6 @@ public class PersonalAccountController {
                         car.getYearStartOfManufacturing() == null ? "неизв." : car.getYearStartOfManufacturing(),
                         car.getYearEndOfManufacturing() == null ? "сегодня" : car.getYearEndOfManufacturing())));
         model.addAttribute("cars", carsDroplist.entrySet());
-        //TODO: fix the bug when role is not saved
         return "account/add-driver-info";
     }
 }

@@ -31,18 +31,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/account/become-driver").access("isFullyAuthenticated() and !hasRole('DRIVER')")
                 .antMatchers("/account/get-driver-role").access("isFullyAuthenticated() and !hasRole('DRIVER')")
                 .antMatchers("/order/add").access("isFullyAuthenticated() and !hasRole('DRIVER')")
-                //Доступ разрешен всем пользователей
                 .antMatchers("/", "/resources/**").permitAll()
                 .antMatchers("/js/**", "/styles/**", "/images/**").permitAll()
                 .and()
                 .authorizeRequests().antMatchers("/login").permitAll()
-                //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
                 .and()
-                //Настройка для входа в систему
                 .formLogin()
                 .loginPage("/login")
-                //Перенарпавление на главную страницу после успешного входа
                 .defaultSuccessUrl("/")
                 .permitAll()
                 .and()
@@ -51,12 +47,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/");
     }
 
-
-    /*
-    @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());
-    }
-     */
 
 }

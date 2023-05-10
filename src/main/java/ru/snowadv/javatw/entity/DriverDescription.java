@@ -25,8 +25,6 @@ public class DriverDescription {
     private Integer serviceRulesViolations = 0;
     @OneToOne(mappedBy = "driverDescription")
     private User user;
-
-
     public void addRating(int rating) {
         if(++reviewsCount == 1) { // if it is the first review
             this.rating = (double) rating;
@@ -34,12 +32,7 @@ public class DriverDescription {
             this.rating = (this.rating + rating) / reviewsCount;
         }
     }
-
     public String getStringRating() {
         return String.format("%.2f", getRating());
-    }
-
-    public User getUser() {
-        return user;
     }
 }

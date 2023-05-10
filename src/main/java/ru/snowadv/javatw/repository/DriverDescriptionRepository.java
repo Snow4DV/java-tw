@@ -5,5 +5,5 @@ import ru.snowadv.javatw.entity.DriverDescription;
 import ru.snowadv.javatw.entity.User;
 
 public interface DriverDescriptionRepository extends JpaRepository<DriverDescription, Long> {
-    DriverDescription findDriverDescriptionById(Long id);
+
 }

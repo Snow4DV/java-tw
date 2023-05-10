@@ -86,7 +86,6 @@ public class User implements UserDetails {
             return "Неизвестный";
         }
     }
-
     public void  addOrder(Order order) {
         orders.add(order);
     }

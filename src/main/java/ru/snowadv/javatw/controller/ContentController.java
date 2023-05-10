@@ -26,8 +26,4 @@ public class ContentController {
         model.addAttribute("isDriver", request.getParameterMap().containsKey("driver"));
         return "index";
     }
-
-
-
-
 }

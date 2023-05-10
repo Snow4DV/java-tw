@@ -25,17 +25,13 @@ import java.util.Optional;
 public class UserService implements UserDetailsService {
     @PersistenceContext
     private EntityManager em;
-
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     RoleRepository roleRepository;
-
     @Autowired
     @Lazy
     BCryptPasswordEncoder bCryptPasswordEncoder;
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
@@ -46,17 +42,10 @@ public class UserService implements UserDetailsService {
 
         return user;
     }
-
     public User findUserById(Long userId) {
         Optional<User> userFromDb = userRepository.findById(userId);
         return userFromDb.orElse(new User());
     }
-
-    public List<User> allUsers() {
-        return userRepository.findAll();
-    }
-
-
     public User save(User user) {
         return userRepository.save(user);
     }
@@ -74,7 +63,6 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
         return true;
     }
-
     public boolean deleteUser(Long userId) {
         if (userRepository.findById(userId).isPresent()) {
             userRepository.deleteById(userId);
@@ -82,16 +70,9 @@ public class UserService implements UserDetailsService {
         }
         return false;
     }
-
-    public List<User> usergtList(Long idMin) {
-        return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
-                .setParameter("paramId", idMin).getResultList();
-    }
-
     public Role getRoleByName(String role) {
         return roleRepository.getRoleByName(role);
     }
-
     public User getCurrentUser() {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
